@@ -12,6 +12,10 @@ public class Veiculo {
     public Veiculo() {
     }
 
+    public Veiculo(int id){
+        this.id = id;
+    }
+
     public Veiculo(int id, String placa) {
         this.id = id;
         this.placa = placa;

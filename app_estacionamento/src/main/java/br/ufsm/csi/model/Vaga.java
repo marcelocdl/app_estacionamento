@@ -8,6 +8,10 @@ public class Vaga {
     public Vaga() {
     }
 
+    public Vaga(int numVaga){
+        this.numVaga = numVaga;
+    }
+
     public Vaga(int numVaga, String andar) {
         this.numVaga = numVaga;
         this.andar = andar;

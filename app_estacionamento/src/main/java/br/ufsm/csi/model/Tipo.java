@@ -8,6 +8,10 @@ public class Tipo {
     public Tipo() {
     }
 
+    public Tipo(int cod_tipo){
+        this.cod_tipo = cod_tipo;
+    }
+
     public Tipo(int cod_tipo, String descricao) {
         this.cod_tipo = cod_tipo;
         this.descricao = descricao;

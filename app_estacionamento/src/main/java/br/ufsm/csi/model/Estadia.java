@@ -11,6 +11,9 @@ public class Estadia {
     private Vaga vaga;
     private Veiculo veiculo;
 
+    public Estadia() {
+    }
+
     public Estadia(String hr_entrada, String hr_saida, Vaga vaga, Veiculo veiculo) {
         this.hr_entrada = hr_entrada;
         this.hr_saida = hr_saida;

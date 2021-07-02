@@ -13,6 +13,10 @@ public class Cliente {
         this.cod_cliente = cod_cliente;
     }
 
+    public Cliente(String cpf){
+        this.cpf = cpf;
+    }
+
     public Cliente(String nome, String cpf) {
         this.nome = nome;
         this.cpf = cpf;

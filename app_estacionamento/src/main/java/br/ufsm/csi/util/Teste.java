@@ -17,7 +17,7 @@ public class Teste {
     public static void testaCadastrarClientes(){
         Cliente cliente = new Cliente("Marcelo", "000.000.000-00");
 
-        new ClienteDAO().cadastrar(cliente);
+        new ClienteDAO().cadastrarCliente(cliente);
     }
 
     public static void testaGetClientes(){

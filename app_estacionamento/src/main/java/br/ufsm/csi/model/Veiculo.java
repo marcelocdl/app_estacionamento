@@ -29,6 +29,15 @@ public class Veiculo {
         this.cliente = cliente;
     }
 
+    public Veiculo(int id, String placa, String modelo, String cor, Tipo tipo, Cliente cliente) {
+        this.id = id;
+        this.placa = placa;
+        this.modelo = modelo;
+        this.cor = cor;
+        this.tipo = tipo;
+        this.cliente = cliente;
+    }
+
     public int getId() {
         return id;
     }

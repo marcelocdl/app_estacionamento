@@ -1,5 +1,6 @@
 package br.ufsm.csi.controller;
 
+import br.ufsm.csi.dao.ClienteDAO;
 import br.ufsm.csi.dao.VeiculoDAO;
 import br.ufsm.csi.model.Cliente;
 import br.ufsm.csi.model.Tipo;
@@ -13,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 
-@WebServlet("veiculo-controller")
+@WebServlet("/veiculo-controller")
 public class VeiculosController extends HttpServlet {
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -28,7 +29,7 @@ public class VeiculosController extends HttpServlet {
 
         }else if (opcao.equals("listar")) {
             req.setAttribute("veiculos", new VeiculoDAO().getVeiculos());
-            req.getRequestDispatcher("listar_veiculo.jsp").forward(req, resp);
+            req.getRequestDispatcher("WEB-INF/jsp/listar_veiculo.jsp").forward(req, resp);
 
         }else if(opcao.equals("atualizar")){
                 int id = Integer.parseInt(req.getParameter("id"));
@@ -36,7 +37,8 @@ public class VeiculosController extends HttpServlet {
                 Veiculo veiculo = new VeiculoDAO().getVeiculosById(id);
 
                 req.setAttribute("veiculo", veiculo);
-                req.getRequestDispatcher("cadastrar_veiculo.jsp").forward(req, resp);
+                req.setAttribute("clientes", new ClienteDAO().getClientes());
+                req.getRequestDispatcher("WEB-INF/jsp/cadastrar_veiculo.jsp").forward(req, resp);
 
         }else{
             int id = Integer.parseInt(req.getParameter("id"));

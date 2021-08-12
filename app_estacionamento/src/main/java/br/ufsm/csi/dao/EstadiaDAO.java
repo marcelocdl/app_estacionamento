@@ -22,18 +22,24 @@ public class EstadiaDAO {
 
         try(Connection connection = new ConectaBD().getConexao()){
 
-            this.sql = "INSERT INTO estadia (data, hrentrada, hrsaida, numvaga, codveiculo) VALUES" +
-                    " (CURRENT_DATE, ?, ?, ?, ?);";
-            this.preparedStatement = connection.prepareStatement(this.sql);
+            Vaga v_dao = new VagaDAO().getVagaById(estadia.getVaga().getNumVaga());
 
-            this.preparedStatement.setString(1, estadia.getHr_entrada());
-            this.preparedStatement.setString(2, estadia.getHr_saida());
-            this.preparedStatement.setInt(3, estadia.getVaga().getNumVaga());
-            this.preparedStatement.setInt(4, estadia.getVeiculo().getId());
+            if(v_dao.isOcupado()){
+                return this.status = "OCUPADO";
+            }
+            else {
+                this.sql = "INSERT INTO estadia (data, hrentrada, hrsaida, numvaga, codveiculo) VALUES" +
+                        " (CURRENT_DATE, ?, ?, ?, ?);";
+                this.preparedStatement = connection.prepareStatement(this.sql);
 
-            this.preparedStatement.execute();
-            this.status = "OK";
+                this.preparedStatement.setString(1, estadia.getHr_entrada());
+                this.preparedStatement.setString(2, estadia.getHr_saida());
+                this.preparedStatement.setInt(3, estadia.getVaga().getNumVaga());
+                this.preparedStatement.setInt(4, estadia.getVeiculo().getId());
 
+                this.preparedStatement.execute();
+                this.status = "OK";
+            }
         }catch(Exception e){
             e.printStackTrace();
             this.status = "ERRO";
@@ -79,6 +85,40 @@ public class EstadiaDAO {
         return estadias;
     }
 
+    public Estadia getEstadia(int id){
+        Estadia estadia = null;
+
+        try(Connection connection = new ConectaBD().getConexao()){
+
+            this.sql = "SELECT * FROM estadia e, veiculo ve, vaga va WHERE " +
+                    "e.codveiculo = ve.codveiculo AND " +
+                    "e.numvaga = va.numvaga AND e.codestadia = ?;";
+            this.preparedStatement = connection.prepareStatement(this.sql);
+            this.preparedStatement.setInt(1, id);
+            this.rs = this.preparedStatement.executeQuery();
+
+            while(this.rs.next()){
+                int codestadia = (this.rs.getInt("codestadia"));
+                String hr_entrada = (this.rs.getString("hrentrada"));
+                String hr_saida = (this.rs.getString("hrsaida"));
+
+                Vaga vaga = new Vaga();
+                vaga.setNumVaga(this.rs.getInt("numvaga"));
+
+                Veiculo veiculo = new Veiculo();
+                veiculo.setId(this.rs.getInt("codveiculo"));
+                veiculo.setPlaca(this.rs.getString("placa"));
+
+                estadia = new Estadia(codestadia, hr_entrada, hr_saida, vaga, veiculo);
+            }
+
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+        return estadia;
+    }
+
     public String saida(Estadia estadia){
         try(Connection connection = new ConectaBD().getConexao()){
 
@@ -91,6 +131,8 @@ public class EstadiaDAO {
 
             this.preparedStatement.execute();
             this.status = "OK";
+
+
 
         }catch(Exception e){
             e.printStackTrace();

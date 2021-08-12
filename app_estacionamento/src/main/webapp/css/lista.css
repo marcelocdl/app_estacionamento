@@ -1,0 +1,59 @@
+html{
+    font-family: "Segoe UI";
+    background-color: #c8d9e0;
+}
+
+div {
+    width: 75%;
+    margin: 0 auto;
+    border-radius: 5px;
+    background-color: #ffffff;
+    padding: 20px;
+}
+
+h1{
+    text-align: center;
+}
+.btn-deletar{
+    text-decoration: none;
+    width: 100%;
+    background-color: #e82c2c;
+    padding: 5px 10px;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.btn-deletar:hover{
+    background-color: #c42525;
+}
+.btn-editar{
+    text-decoration: none;
+    width: 100%;
+    background-color: #6ce254;
+    padding: 5px 10px;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.btn-editar:hover{
+    background-color: #5bbf47;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even){background-color: #f2f2f2}
+
+th {
+    background-color: #4ba6d4;
+    color: white;
+}

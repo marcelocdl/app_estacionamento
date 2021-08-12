@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("cliente-controller")
+@WebServlet("/cliente-controller")
 public class ClienteController extends HttpServlet {
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -28,7 +28,7 @@ public class ClienteController extends HttpServlet {
 
         }else if (opcao.equals("listar")) {
             req.setAttribute("clientes", new ClienteDAO().getClientes());
-            req.getRequestDispatcher("listar_cliente.jsp").forward(req, resp);
+            req.getRequestDispatcher("WEB-INF/jsp/listar_cliente.jsp").forward(req, resp);
 
         }else if(opcao.equals("atualizar")){
             int id = Integer.parseInt(req.getParameter("id"));
@@ -36,7 +36,7 @@ public class ClienteController extends HttpServlet {
             Cliente cliente = new ClienteDAO().getClienteById(id);
 
             req.setAttribute("cliente", cliente);
-            req.getRequestDispatcher("cadastrar_cliente.jsp").forward(req, resp);
+            req.getRequestDispatcher("WEB-INF/jsp/cadastrar_cliente.jsp").forward(req, resp);
 
         }else{
             int id = Integer.parseInt(req.getParameter("id"));

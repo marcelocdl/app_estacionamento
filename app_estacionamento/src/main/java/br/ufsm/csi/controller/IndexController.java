@@ -16,10 +16,8 @@ public class IndexController extends HttpServlet {
 
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("Index...");
-
         req.setAttribute("estadias", new EstadiaDAO().getEstadias());
-        RequestDispatcher rd = req.getRequestDispatcher("menu.jsp");
+        RequestDispatcher rd = req.getRequestDispatcher("WEB-INF/jsp/menu.jsp");
         rd.forward(req, resp);
     }
 }
